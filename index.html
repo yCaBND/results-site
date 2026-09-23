@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Результаты конкурса</title>
+<style>
+  :root{
+    --bg:#12151c;
+    --card:#1b1f2a;
+    --text:#eef0f4;
+    --muted:#8b93a7;
+    --accent:#f2b134;
+    --accent2:#5ee6a8;
+    --line:#2a2f3d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI',system-ui,sans-serif;
+    padding:32px 16px 64px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,42px);
+    font-weight:700;
+    text-align:center;
+    margin:0 0 4px;
+    letter-spacing:-0.5px;
+  }
+  .subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin:0 0 40px;
+    font-size:15px;
+  }
+  #list{
+    max-width:640px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .row{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .rank{
+    width:44px;
+    text-align:center;
+    font-size:22px;
+    flex-shrink:0;
+  }
+  .rank.number{
+    font-size:15px;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .info{flex:1;min-width:0;}
+  .name{
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:8px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .bar-track{
+    height:8px;
+    border-radius:5px;
+    background:var(--line);
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    border-radius:5px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent));
+    width:0%;
+    transition:width .8s ease;
+  }
+  #status{
+    text-align:center;
+    color:var(--muted);
+    padding:40px;
+    font-size:14px;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Результаты конкурса</h1>
+  <p class="subtitle">Места участников обновляются автоматически</p>
+
+  <div id="list"></div>
+  <p id="status"></p>
+
+<script>
+// ==========================================================
+// НАСТРОЙКА: вставьте сюда ссылку на вашу Google-таблицу,
+// опубликованную как CSV.
+//
+// Как получить ссылку:
+// 1. Откройте таблицу в Google Sheets
+// 2. Файл -> Поделиться -> Опубликовать в интернете
+// 3. Выберите нужный лист, формат "Значения, разделённые запятыми (.csv)"
+// 4. Нажмите "Опубликовать" и скопируйте ссылку сюда
+//
+// В таблице должно быть 2 колонки: Имя и Результат (число)
+// ==========================================================
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQl0BPZ8z0POWQA2SC4o_z_ikBEoUCi0rcfqzTg6HolqkcKPsauX9rsicpkMpRvnJWa5nB0t641F-N/pub?output=csv";
+
+const medals = ["🥇", "🥈", "🥉"];
+
+async function loadResults() {
+  const listEl = document.getElementById("list");
+  const statusEl = document.getElementById("status");
+
+  if (SHEET_CSV_URL.includes("ВСТАВЬТЕ")) {
+    statusEl.textContent = "Не настроена ссылка на таблицу — см. комментарий в коде (SHEET_CSV_URL).";
+    return;
+  }
+
+  try {
+    statusEl.textContent = "Загрузка результатов…";
+    const res = await fetch(SHEET_CSV_URL + "&cachebust=" + Date.now());
+    const text = await res.text();
+
+    // Простой разбор CSV: первая строка — заголовки, остальные — данные
+    const rows = text.trim().split("\n").map(r => r.split(","));
+    const data = rows.slice(1)
+      .map(r => ({ name: r[0]?.trim(), score: parseFloat(r[1]) }))
+      .filter(r => r.name && !isNaN(r.score));
+
+    if (data.length === 0) {
+      statusEl.textContent = "В таблице пока нет данных.";
+      return;
+    }
+
+    // Сортировка по убыванию результата (сам результат нигде не показываем)
+    data.sort((a, b) => b.score - a.score);
+    const maxScore = data[0].score;
+
+    listEl.innerHTML = "";
+    data.forEach((item, i) => {
+      const row = document.createElement("div");
+      row.className = "row";
+
+      const rank = document.createElement("div");
+      rank.className = i < 3 ? "rank" : "rank number";
+      rank.textContent = i < 3 ? medals[i] : `${i + 1}`;
+
+      const info = document.createElement("div");
+      info.className = "info";
+      info.innerHTML = `
+        <div class="name">${item.name}</div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      `;
+
+      row.appendChild(rank);
+      row.appendChild(info);
+      listEl.appendChild(row);
+
+      // ширина полоски — относительная, без подписи цифрой
+      requestAnimationFrame(() => {
+        const fill = info.querySelector(".bar-fill");
+        fill.style.width = Math.max(6, (item.score / maxScore) * 100) + "%";
+      });
+    });
+
+    statusEl.textContent = "";
+  } catch (e) {
+    statusEl.textContent = "Не удалось загрузить данные. Проверьте ссылку на таблицу.";
+    console.error(e);
+  }
+}
+
+loadResults();
+</script>
+</body>
+</html>
