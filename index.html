@@ -75,9 +75,17 @@ async function loadResults() {
     const res = await fetch(SHEET_CSV_URL + "&cachebust=" + Date.now());
     const text = await res.text();
 
-    const rows = text.trim().split("\n").map(r => r.split(","));
-    const headers = rows[0].map(h => h.trim());
+    // Убираем BOM-символ, который Google иногда добавляет в начало CSV —
+    // без этого первая колонка ("Имя") не находится по названию
+    const cleanText = text.replace(/^\uFEFF/, "");
+    const rows = cleanText.trim().split("\n").map(r => r.split(","));
+    const headers = rows[0].map(h => h.trim().replace(/^\uFEFF/, ""));
     const idx = name => headers.indexOf(name);
+
+    if (idx("Имя") === -1) {
+      statusEl.textContent = "Не нашёл колонку «Имя» в таблице. Заголовки в файле: " + headers.join(", ");
+      return;
+    }
 
     let data = rows.slice(1).map(r => ({
       name: r[idx("Имя")]?.trim(),
