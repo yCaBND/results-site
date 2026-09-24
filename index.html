@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -6,116 +6,60 @@
 <title>Результаты конкурса</title>
 <style>
   :root{
-    --bg:#12151c;
-    --card:#1b1f2a;
-    --text:#eef0f4;
-    --muted:#8b93a7;
-    --accent:#f2b134;
-    --accent2:#5ee6a8;
-    --line:#2a2f3d;
+    --bg:#12151c; --card:#1b1f2a; --text:#eef0f4; --muted:#8b93a7;
+    --accent:#f2b134; --accent2:#5ee6a8; --line:#2a2f3d; --up:#5ee6a8; --down:#f26d6d;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Segoe UI',system-ui,sans-serif;
-    padding:32px 16px 64px;
-  }
-  h1{
-    font-size:clamp(28px,5vw,42px);
-    font-weight:700;
-    text-align:center;
-    margin:0 0 4px;
-    letter-spacing:-0.5px;
-  }
-  .subtitle{
-    text-align:center;
-    color:var(--muted);
-    margin:0 0 40px;
-    font-size:15px;
-  }
-  #list{
-    max-width:640px;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .row{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:16px 20px;
-    display:flex;
-    align-items:center;
-    gap:16px;
-  }
-  .rank{
-    width:44px;
-    text-align:center;
-    font-size:22px;
-    flex-shrink:0;
-  }
-  .rank.number{
-    font-size:15px;
-    color:var(--muted);
-    font-weight:600;
-  }
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;padding:32px 16px 64px;}
+  h1{font-size:clamp(28px,5vw,42px);font-weight:700;text-align:center;margin:0 0 4px;letter-spacing:-0.5px;}
+  .subtitle{text-align:center;color:var(--muted);margin:0 0 40px;font-size:15px;}
+  #list{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;}
+  .top{display:flex;align-items:center;gap:16px;}
+  .rank{width:44px;text-align:center;font-size:22px;flex-shrink:0;}
+  .rank.number{font-size:15px;color:var(--muted);font-weight:600;}
   .info{flex:1;min-width:0;}
-  .name{
-    font-weight:600;
-    font-size:16px;
-    margin-bottom:8px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .bar-track{
-    height:8px;
-    border-radius:5px;
-    background:var(--line);
-    overflow:hidden;
-  }
-  .bar-fill{
-    height:100%;
-    border-radius:5px;
-    background:linear-gradient(90deg,var(--accent2),var(--accent));
-    width:0%;
-    transition:width .8s ease;
-  }
-  #status{
-    text-align:center;
-    color:var(--muted);
-    padding:40px;
-    font-size:14px;
-  }
+  .name{font-weight:600;font-size:16px;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bar-track{height:8px;border-radius:5px;background:var(--line);overflow:hidden;}
+  .bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0%;transition:width .8s ease;}
+  .trend{font-size:13px;font-weight:700;flex-shrink:0;width:40px;text-align:center;}
+  .trend.up{color:var(--up);} .trend.down{color:var(--down);} .trend.flat{color:var(--muted);}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+  .badge{font-size:12px;color:var(--muted);background:#151922;border:1px solid var(--line);border-radius:8px;padding:4px 10px;}
+  #status{text-align:center;color:var(--muted);padding:40px;font-size:14px;}
 </style>
 </head>
 <body>
-
   <h1>Результаты конкурса</h1>
-  <p class="subtitle">Места участников обновляются автоматически</p>
-
+  <p class="subtitle">Места и достижения участников обновляются автоматически</p>
   <div id="list"></div>
   <p id="status"></p>
 
 <script>
 // ==========================================================
-// НАСТРОЙКА: вставьте сюда ссылку на вашу Google-таблицу,
-// опубликованную как CSV.
+// НАСТРОЙКА: ссылка на Google-таблицу, опубликованную как CSV
+// (Файл -> Поделиться -> Опубликовать в интернете -> CSV)
 //
-// Как получить ссылку:
-// 1. Откройте таблицу в Google Sheets
-// 2. Файл -> Поделиться -> Опубликовать в интернете
-// 3. Выберите нужный лист, формат "Значения, разделённые запятыми (.csv)"
-// 4. Нажмите "Опубликовать" и скопируйте ссылку сюда
+// Ожидаемые колонки таблицы (первая строка — заголовки):
+// Имя | Выручка | Прибыль | Наценка | ВсегоСчетов | ОплаченоСчетов |
+// Клиентов | ВыручкаПрошлая | ПрибыльПрошлая | Стаж | Филиал
 //
-// В таблице должно быть 2 колонки: Имя и Результат (число)
+// "ВыручкаПрошлая"/"ПрибыльПрошлая" нужны только для стрелки
+// тренда — сами суммы нигде на странице не показываются.
 // ==========================================================
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQl0BPZ8z0POWQA2SC4o_z_ikBEoUCi0rcfqzTg6HolqkcKPsauX9rsicpkMpRvnJWa5nB0t641F-N/pub?output=csv";
+const SHEET_CSV_URL = "ВСТАВЬТЕ_СЮДА_ССЫЛКУ_НА_CSV";
 
 const medals = ["🥇", "🥈", "🥉"];
+
+function num(v){ const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+
+function marginTier(pct){
+  // Наценка в цифрах не показывается — только категория,
+  // чтобы её нельзя было использовать для прикидки прибыли
+  if (pct >= 15) return "🔥🔥🔥 высокая эффективность";
+  if (pct >= 10) return "🔥🔥 средняя эффективность";
+  return "🔥 базовая эффективность";
+}
 
 async function loadResults() {
   const listEl = document.getElementById("list");
@@ -131,46 +75,71 @@ async function loadResults() {
     const res = await fetch(SHEET_CSV_URL + "&cachebust=" + Date.now());
     const text = await res.text();
 
-    // Простой разбор CSV: первая строка — заголовки, остальные — данные
     const rows = text.trim().split("\n").map(r => r.split(","));
-    const data = rows.slice(1)
-      .map(r => ({ name: r[0]?.trim(), score: parseFloat(r[1]) }))
-      .filter(r => r.name && !isNaN(r.score));
+    const headers = rows[0].map(h => h.trim());
+    const idx = name => headers.indexOf(name);
+
+    let data = rows.slice(1).map(r => ({
+      name: r[idx("Имя")]?.trim(),
+      revenue: num(r[idx("Выручка")]),
+      margin: num(r[idx("Наценка")]),
+      invoicesTotal: num(r[idx("ВсегоСчетов")]),
+      invoicesPaid: num(r[idx("ОплаченоСчетов")]),
+      clients: num(r[idx("Клиентов")]),
+      revenuePrev: num(r[idx("ВыручкаПрошлая")]),
+      tenure: r[idx("Стаж")]?.trim(),
+      branch: r[idx("Филиал")]?.trim(),
+    })).filter(r => r.name);
 
     if (data.length === 0) {
       statusEl.textContent = "В таблице пока нет данных.";
       return;
     }
 
-    // Сортировка по убыванию результата (сам результат нигде не показываем)
-    data.sort((a, b) => b.score - a.score);
-    const maxScore = data[0].score;
+    // Текущий рейтинг по выручке (сама выручка не показывается)
+    data.sort((a, b) => b.revenue - a.revenue);
+    const maxRevenue = data[0].revenue;
+
+    // Рейтинг прошлого периода — только чтобы посчитать движение мест
+    const prevRanked = [...data].sort((a, b) => b.revenuePrev - a.revenuePrev);
+    const prevRank = {};
+    prevRanked.forEach((r, i) => prevRank[r.name] = i);
 
     listEl.innerHTML = "";
     data.forEach((item, i) => {
       const row = document.createElement("div");
       row.className = "row";
 
-      const rank = document.createElement("div");
-      rank.className = i < 3 ? "rank" : "rank number";
-      rank.textContent = i < 3 ? medals[i] : `${i + 1}`;
+      const prevPos = prevRank[item.name];
+      const diff = prevPos !== undefined ? prevPos - i : 0;
+      const trendClass = diff > 0 ? "up" : diff < 0 ? "down" : "flat";
+      const trendText = diff > 0 ? `▲${diff}` : diff < 0 ? `▼${Math.abs(diff)}` : "—";
 
-      const info = document.createElement("div");
-      info.className = "info";
-      info.innerHTML = `
-        <div class="name">${item.name}</div>
-        <div class="bar-track"><div class="bar-fill"></div></div>
+      const conversion = item.invoicesTotal ? Math.round((item.invoicesPaid / item.invoicesTotal) * 100) : null;
+
+      const badges = [];
+      if (item.clients) badges.push(`👥 ${item.clients} клиентов`);
+      if (conversion !== null) badges.push(`✅ ${conversion}% оплаченных счетов`);
+      if (item.margin) badges.push(marginTier(item.margin));
+      if (item.tenure) badges.push(`🕐 стаж: ${item.tenure}`);
+      if (item.branch) badges.push(`📍 ${item.branch}`);
+
+      row.innerHTML = `
+        <div class="top">
+          <div class="${i < 3 ? 'rank' : 'rank number'}">${i < 3 ? medals[i] : (i + 1)}</div>
+          <div class="info">
+            <div class="name">${item.name}</div>
+            <div class="bar-track"><div class="bar-fill" data-w="${Math.max(6,(item.revenue/maxRevenue)*100)}"></div></div>
+          </div>
+          <div class="trend ${trendClass}">${trendText}</div>
+        </div>
+        ${badges.length ? `<div class="badges">${badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>` : ""}
       `;
-
-      row.appendChild(rank);
-      row.appendChild(info);
       listEl.appendChild(row);
+    });
 
-      // ширина полоски — относительная, без подписи цифрой
-      requestAnimationFrame(() => {
-        const fill = info.querySelector(".bar-fill");
-        fill.style.width = Math.max(6, (item.score / maxScore) * 100) + "%";
-      });
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".bar-fill").forEach(el => { el.style.width = el.dataset.w + "%"; });
     });
 
     statusEl.textContent = "";
