@@ -130,7 +130,9 @@ async function loadResults() {
       if (conversion !== null) badges.push(`✅ ${conversion}% оплаченных счетов`);
       if (item.margin) badges.push(marginTier(item.margin));
       if (item.tenure) badges.push(`🕐 стаж: ${item.tenure}`);
-      if (item.branch) badges.push(`📍 ${item.branch}`);
+      // Страховка: если из-за сдвига колонок в "Филиал" попало число
+      // (например, случайно сумма), бейдж не показываем вообще
+      if (item.branch && isNaN(Number(item.branch))) badges.push(`📍 ${item.branch}`);
 
       row.innerHTML = `
         <div class="top">
