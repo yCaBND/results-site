@@ -51,7 +51,29 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQl0BPZ8
 
 const medals = ["🥇", "🥈", "🥉"];
 
-function num(v){ const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+function num(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
+
+// Разбирает одну строку CSV с учётом кавычек — чтобы запятая ВНУТРИ
+// значения (например, если число записано как "16,85") не путалась
+// с запятой-разделителем между колонками
+function parseCSVLine(line) {
+  const result = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') {
+      if (inQuotes && line[i + 1] === '"') { cur += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (c === "," && !inQuotes) {
+      result.push(cur); cur = "";
+    } else {
+      cur += c;
+    }
+  }
+  result.push(cur);
+  return result;
+}
 
 function marginTier(pct){
   // Наценка в цифрах не показывается — только категория,
@@ -78,7 +100,7 @@ async function loadResults() {
     // Убираем BOM-символ, который Google иногда добавляет в начало CSV —
     // без этого первая колонка ("Имя") не находится по названию
     const cleanText = text.replace(/^\uFEFF/, "");
-    const rows = cleanText.trim().split("\n").map(r => r.split(","));
+    const rows = cleanText.trim().split("\n").map(parseCSVLine);
     const headers = rows[0].map(h => h.trim().replace(/^\uFEFF/, ""));
     const idx = name => headers.indexOf(name);
 
