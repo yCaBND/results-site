@@ -29,7 +29,7 @@
 </main><div id="confetti" class="confetti" aria-hidden="true"></div>
 <script>
 // После публикации Google Apps Script вставьте URL веб-приложения сюда.
-const API_URL = 'https://docs.google.com/spreadsheets/d/1sHtxcXdKR2lOeSfjbAm8g49_yS9kUBat5BzPpHA5YE8/edit?usp=sharing';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzbddTbLv_ih7vlI1BIAleDOmuB9U919esonv8qUeUUfszgT0kyV2bIfTKEqUWNCXyxUA/exec';
 const money = n => new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:0}).format(Number(n)||0);
 const pct = n => (Number(n)||0).toLocaleString('ru-RU',{maximumFractionDigits:2,minimumFractionDigits:0})+'%';
 function showError(msg){const el=document.getElementById('error');el.style.display='block';el.textContent=msg;}
