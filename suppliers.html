@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поставщикам — Балс</title>
+<meta name="description" content="Компания Балс ежедневно закупает кабельную и электротехническую продукцию, упаковку, сувенирную продукцию и транспортные услуги. Заполните анкету поставщика.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef1f4;
+    --ink: #13202c;
+    --muted: #54626f;
+    --card: #ffffff;
+    --line: #cfd7de;
+    --yellow: #f2c200;
+    --blue: #1f5fbf;
+    --green: #2f8f5b;
+    --red: #c8452d;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 56px; }
+  .back { display: inline-block; color: var(--muted); text-decoration: none; font-size: 15px; margin-bottom: 28px; }
+  .back:hover { color: var(--ink); text-decoration: underline; }
+  h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.1; font-weight: 800; margin: 0 0 20px; letter-spacing: -0.02em; }
+  .bar { height: 8px; width: 120px; background: linear-gradient(90deg, var(--blue) 0 25%, var(--yellow) 25% 50%, var(--green) 50% 75%, var(--red) 75%); border-radius: 4px; margin-bottom: 24px; }
+  .lead { font-size: 18px; max-width: 62ch; margin: 0 0 16px; }
+  .list { margin: 0 0 16px; padding-left: 20px; max-width: 62ch; }
+  .list li { margin-bottom: 8px; }
+  .note { color: var(--muted); max-width: 62ch; margin: 0 0 36px; }
+  h2 { font-size: 22px; margin: 0 0 16px; }
+  .buttons { display: grid; gap: 12px; }
+  .btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 8px solid var(--c);
+    border-radius: 6px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 18px; font-weight: 700;
+    transition: background .15s, border-color .15s;
+  }
+  .btn small { display: block; font-weight: 400; font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .btn svg { flex: none; width: 22px; height: 22px; }
+  .btn:hover { background: #fffbe6; border-color: var(--ink); border-left-color: var(--c); }
+  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .b1 { --c: var(--blue); } .b2 { --c: var(--yellow); } .b3 { --c: var(--green); } .b4 { --c: var(--red); }
+  footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 480px) { .btn { padding: 18px 16px; font-size: 17px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="/">← На главную Балс</a>
+
+  <h1>Поставщикам</h1>
+  <div class="bar" aria-hidden="true"></div>
+
+  <p class="lead">Компания Балс ежедневно закупает:</p>
+  <ul class="list">
+    <li><strong>кабельную и электротехническую продукцию;</strong></li>
+    <li><strong>упаковку для кабельной продукции:</strong> кабельные барабаны, паллеты, стрейч-плёнку, упаковочную ленту, скотч, гофрокартон и гофроящики, торцевые заглушки и колпачки для кабеля;</li>
+    <li><strong>сувенирную продукцию;</strong></li>
+    <li><strong>транспортные услуги.</strong></li>
+  </ul>
+  <p class="note">Выберите своё направление и заполните короткую анкету. Мы свяжемся с вами, если ваше предложение подойдёт.</p>
+
+  <h2>Выберите направление</h2>
+  <nav class="buttons" aria-label="Анкеты поставщиков">
+    <!-- ЗАМЕНИТЕ ссылки ниже на ссылки ваших Яндекс Форм -->
+    <a class="btn b1" href="https://forms.yandex.ru/cloud/ССЫЛКА_1/" target="_blank" rel="noopener">
+      <span>Для поставщиков КП и ЭТ<small>Кабельная продукция и электротехника</small></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <a class="btn b2" href="https://forms.yandex.ru/cloud/ССЫЛКА_2/" target="_blank" rel="noopener">
+      <span>Транспортным компаниям<small>Перевозки и доставка грузов</small></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <a class="btn b3" href="https://forms.yandex.ru/cloud/ССЫЛКА_3/" target="_blank" rel="noopener">
+      <span>Приём б/у тары<small>Кабельные барабаны, паллеты</small></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <a class="btn b4" href="https://forms.yandex.ru/cloud/ССЫЛКА_4/" target="_blank" rel="noopener">
+      <span>Прочая продукция / услуги<small>Упаковка, сувенирная продукция и другое</small></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </nav>
+
+  <footer>© Балс</footer>
+</main>
+</body>
+</html>
