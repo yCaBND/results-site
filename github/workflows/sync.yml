@@ -1,0 +1,41 @@
+name: Sync catalog
+
+on:
+  schedule:
+    - cron: '17 */2 * * *'   # каждые 2 часа (UTC)
+  workflow_dispatch:          # кнопка ручного запуска
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write         # нужно для git push в main
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install requests
+
+      - name: Sync Elcom + RS
+        env:
+          ELCOM_TOKEN: ${{ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3OTE2MDk0MTEyMCIsInVzciI6IjcxYWY2ODk2OTNhNDMzYzA2MDg2OTYyMjY2YmRmYTg4YWQ4OWZkN2E3Y2Y0OWJlN2I3NzMyYTBmYzZhNjU0ZmUiLCJyb2xlcyI6WyJST0xFX0FDQ09VTlQiXSwiaWF0IjoxNzkzMjc4NTU4LCJleHAiOjE4MjQzODI1NTh9.U1LRoc5m7QO2cf82_A5Av6eLF9De8g9ZMujOrSMkWko }}
+          RS_USER:     ${{ BN@RGKBRU }}
+          RS_PASSWORD: ${{ AS1765my }}
+        run: python scripts/export.py
+
+      - name: Commit & push
+        run: |
+          git config user.name  "catalog-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add docs/data
+          if ! git diff --staged --quiet; then
+            git commit -m "catalog: $(date -u +%FT%TZ)"
+            git push
+          fi
