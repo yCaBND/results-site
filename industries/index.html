@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Отрасли — Балс</title>
+  <meta name="description" content="Отрасли, для которых Балс поставляет кабель и электротехнику: строительство, энергетика, ЖКХ, промышленность.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <div id="site-header"></div>
+
+  <main class="main-content" id="main">
+    <section class="page-head">
+      <div class="wrapper">
+        <nav class="breadcrumbs" aria-label="Навигация"><a href="./">Главная</a><span class="sep">/</span><span>Отрасли</span></nav>
+        <h1>Отрасли</h1>
+        <p class="lead">Мы поставляем кабель и электротехнику компаниям из отраслей с постоянным расходом материалов.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrapper">
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="card-title">Строительство</div>
+            <p class="card-text">Жилые и промышленные объекты, генподряд и субподряд. Поставка по позициям спецификации к срокам монтажа.</p>
+          </article>
+          <article class="card">
+            <div class="card-title">Энергетика</div>
+            <p class="card-text">Кабельные линии 1–10 кВ, подстанции, распределительные сети.</p>
+          </article>
+          <article class="card">
+            <div class="card-title">ЖКХ</div>
+            <p class="card-text">Водоканалы, теплосети, коммунальная инфраструктура.</p>
+          </article>
+          <article class="card">
+            <div class="card-title">Промышленность</div>
+            <p class="card-text">Предприятия с регулярными закупками кабеля и электротехники.</p>
+          </article>
+        </div>
+
+        <div class="info-note warn" style="margin-top:26px">
+          <strong>Требуется уточнение</strong>
+          Состав отраслей и описания подготовлены как каркас. Уточните перечень отраслей, в которых
+          вы реально работаете, — и мы дополним раздел фактами и кейсами.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="overlay" id="write-us" role="dialog" aria-modal="true" aria-labelledby="write-us-title" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div><h2 class="modal-title" id="write-us-title">Написать нам</h2><p class="modal-description">Ответим в ближайшее рабочее время.</p></div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <form data-form="write_us">
+        <div class="field"><label for="wu-inn">ИНН организации <span class="req">*</span></label><input class="input" id="wu-inn" name="inn" inputmode="numeric" required placeholder="10 или 12 цифр"></div>
+        <div class="field"><label for="wu-email">E-mail <span class="req">*</span></label><input class="input" id="wu-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru"></div>
+        <div class="field"><label for="wu-message">Сообщение <span class="req">*</span></label><textarea class="textarea" id="wu-message" name="message" required placeholder="Опишите задачу или укажите позиции"></textarea></div>
+        <div class="field" style="font-size:13px;color:var(--muted)">Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.</div>
+        <button class="button big-button" type="submit">Отправить</button>
+        <div class="form-notice" role="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+
+</body>
+</html>

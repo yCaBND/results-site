@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Домен взят из CNAME: балс.рус (punycode). После смены домена обновите адреса. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://xn--80ab5aya.xn--p1acf/</loc><priority>1.0</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/about/</loc><priority>0.8</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/catalog/</loc><priority>0.9</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/quote/</loc><priority>0.9</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/industries/</loc><priority>0.7</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/delivery/</loc><priority>0.7</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/documents/</loc><priority>0.6</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/projects/</loc><priority>0.6</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/news/</loc><priority>0.6</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/contacts/</loc><priority>0.8</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/suppliers/</loc><priority>0.7</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/partners/</loc><priority>0.7</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/contest/</loc><priority>0.8</priority></url>
+  <url><loc>https://xn--80ab5aya.xn--p1acf/privacy/</loc><priority>0.3</priority></url>
+</urlset>

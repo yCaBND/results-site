@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контакты — Балс</title>
+  <meta name="description" content="Контакты Балс: представительство в Москве, телефон, e-mail, реквизиты для документов.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <div id="site-header"></div>
+
+  <main class="main-content" id="main">
+    <section class="page-head">
+      <div class="wrapper">
+        <nav class="breadcrumbs" aria-label="Навигация"><a href="./">Главная</a><span class="sep">/</span><span>Контакты</span></nav>
+        <h1>Контакты</h1>
+        <p class="lead">Свяжитесь с нами удобным способом — ответим в рабочее время.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrapper">
+        <div class="grid grid-2" style="align-items:start;gap:32px">
+          <div>
+            <div class="grid grid-2">
+              <article class="card">
+                <div class="card-title">Телефон</div>
+                <a href="tel:+79160941120" style="font-size:20px;font-weight:700">+7 (916) 094-11-20</a>
+              </article>
+              <article class="card">
+                <div class="card-title">Почта</div>
+                <a href="mailto:bnd@rkb.ru" style="font-size:20px;font-weight:700;word-break:break-all">bnd@rkb.ru</a>
+              </article>
+            </div>
+
+            <article class="card" style="margin-top:20px">
+              <div class="card-title">Офис и реквизиты</div>
+              <p class="card-text">
+                Москва, представительство «Балс».
+              </p>
+              <div class="info-note warn" style="margin-top:16px">
+                <strong>Адрес и реквизиты не заполнены</strong>
+                В исходных файлах сайта нет улицы, индекса, ИНН/КПП/ОГРН и банковских реквизитов.
+                Пришлите их — добавим сюда и в подвал.
+              </div>
+            </article>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+              <button class="button big-button" type="button" data-open-modal="write-us">Написать нам</button>
+              <a class="button big-button gray-button" href="quote/">Посчитать стоимость</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Карта</div>
+            <p class="card-text" style="margin-bottom:14px">
+              Карта появится после подтверждения адреса офиса и склада.
+            </p>
+            <div style="height:280px;border-radius:var(--radius);border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:14px;background:var(--light-gray)">
+              Место для карты (Яндекс.Карты)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="overlay" id="write-us" role="dialog" aria-modal="true" aria-labelledby="write-us-title" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div><h2 class="modal-title" id="write-us-title">Написать нам</h2><p class="modal-description">Ответим в ближайшее рабочее время.</p></div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <form data-form="write_us">
+        <div class="field"><label for="wu-inn">ИНН организации <span class="req">*</span></label><input class="input" id="wu-inn" name="inn" inputmode="numeric" required placeholder="10 или 12 цифр"></div>
+        <div class="field"><label for="wu-email">E-mail <span class="req">*</span></label><input class="input" id="wu-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru"></div>
+        <div class="field"><label for="wu-message">Сообщение <span class="req">*</span></label><textarea class="textarea" id="wu-message" name="message" required placeholder="Опишите задачу или укажите позиции"></textarea></div>
+        <div class="field" style="font-size:13px;color:var(--muted)">Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.</div>
+        <button class="button big-button" type="submit">Отправить</button>
+        <div class="form-notice" role="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+
+</body>
+</html>

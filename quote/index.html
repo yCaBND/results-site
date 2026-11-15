@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заказать / посчитать стоимость — Балс</title>
+  <meta name="description" content="Опишите задачу в окне ассистента или выберите позиции в каталоге остатков — подготовим расчёт стоимости кабельной и электротехнической продукции.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <div id="site-header"></div>
+
+  <main class="main-content" id="main">
+
+    <section class="page-head">
+      <div class="wrapper">
+        <nav class="breadcrumbs" aria-label="Навигация">
+          <a href="./">Главная</a><span class="sep">/</span><span>Заказать / посчитать</span>
+        </nav>
+        <h1>Заказать / посчитать стоимость</h1>
+        <p class="lead">Опишите задачу обычным текстом или подберите позиции в каталоге. Расчёт подготовим в рабочее время.</p>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="wrapper">
+        <div class="quote-layout">
+
+          <!-- ===================== БЛОК 1: окно ассистента ===================== -->
+          <div class="accordion is-open" id="ai-panel" data-collapse>
+            <button class="accordion-head" type="button" aria-expanded="true" aria-controls="ai-panel-body">
+              <span>1. Опишите задачу</span>
+              <svg class="icon icon-stroke" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg>
+            </button>
+
+            <div class="accordion-body" id="ai-panel-body" style="padding:0">
+              <div class="ai-panel" style="border-radius:0">
+                <div class="ai-panel-head">
+                  <span class="category-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                      <rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 13h.01M15 13h.01M9 16h6"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <h2>Ассистент по подбору</h2>
+                    <p id="ai-status">Демонстрационный режим — агент не подключён</p>
+                  </div>
+                </div>
+
+                <div class="ai-thread" id="ai-thread" aria-live="polite">
+                  <div class="ai-msg bot">
+                    Здравствуйте! Напишите, что нужно приобрести: марку, сечение, количество жил, напряжение и объём.
+                    Можно приложить спецификацию, скриншот или записать голосовое сообщение.
+                    <small>Пока это демонстрация интерфейса</small>
+                  </div>
+                </div>
+
+                <form class="ai-composer" id="ai-form">
+                  <div class="ai-composer-box">
+                    <button class="ai-tool" type="button" id="ai-attach" aria-label="Прикрепить файл" title="Прикрепить файл">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                        <path d="M8 12.5l6.3-6.3a3 3 0 114.2 4.2l-7.7 7.7a5 5 0 11-7-7l8-8"/>
+                      </svg>
+                    </button>
+                    <button class="ai-tool" type="button" id="ai-shot" aria-label="Сделать скриншот" title="Скриншот экрана">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                        <path d="M3 8V5a2 2 0 012-2h3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M8 21H5a2 2 0 01-2-2v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/>
+                      </svg>
+                    </button>
+                    <button class="ai-tool" type="button" id="ai-voice" aria-label="Записать голосовое сообщение" aria-pressed="false" title="Голосовое сообщение">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                        <rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>
+                      </svg>
+                    </button>
+
+                    <label class="visually-hidden" for="ai-input">Ваш запрос</label>
+                    <textarea id="ai-input" rows="1" placeholder="Например: кабель АВБШВ 4х120, 1 кВ — 500 метров"></textarea>
+
+                    <button class="ai-send" type="submit" aria-label="Отправить запрос">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 12l16-8-6 16-3-6-7-2z"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <input class="visually-hidden" type="file" id="ai-file" multiple
+                         accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png,.webp,.heic,.dwg,.zip">
+
+                  <div class="ai-attach-list" id="ai-attach-list"></div>
+
+                  <div class="ai-recording" id="ai-recording" role="status">
+                    <span class="dot" aria-hidden="true"></span><span>Идёт запись… 0:00</span>
+                  </div>
+
+                  <div class="ai-composer-foot">
+                    <span>Enter — отправить, Shift+Enter — новая строка</span>
+                    <span id="ai-limit">Файл до 25 МБ · PDF, DOCX, XLSX, JPG, PNG, DWG</span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===================== БЛОК 2: каталог остатков ===================== -->
+          <div class="accordion is-open" id="catalog-panel" data-collapse>
+            <button class="accordion-head" type="button" aria-expanded="true" aria-controls="catalog-panel-body">
+              <span>2. Каталог продукции и остатки</span>
+              <svg class="icon icon-stroke" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg>
+            </button>
+
+            <div class="accordion-body" id="catalog-panel-body" style="padding:0">
+              <div class="catalog-panel" style="border-radius:0">
+                <div class="catalog-panel-head">
+                  <h2>Наличие на складе</h2>
+                  <button class="button gray-button" type="button" id="ask-from-catalog" style="height:40px;padding:0 18px;font-size:14px">
+                    Подобрать аналог
+                  </button>
+                </div>
+
+                <p class="demo-flag">
+                  <strong>Демо-данные.</strong>&nbsp;Остатки в таблице сгенерированы для примера и не отражают реальное наличие.
+                  Каталог будет подгружаться из Google Таблиц, затем — по API.
+                </p>
+
+                <div class="catalog-filters">
+                  <div class="field field-wide">
+                    <label for="f-brand">Марка кабеля</label>
+                    <select class="select" id="f-brand"></select>
+                  </div>
+                  <div class="field">
+                    <label for="f-section">Сечение, мм²</label>
+                    <select class="select" id="f-section"></select>
+                  </div>
+                  <div class="field">
+                    <label for="f-cores">Число жил</label>
+                    <select class="select" id="f-cores"></select>
+                  </div>
+                  <div class="field">
+                    <label for="f-voltage">Напряжение</label>
+                    <select class="select" id="f-voltage"></select>
+                  </div>
+                  <button class="filter-reset" type="button" id="filter-reset">Сбросить фильтры</button>
+                </div>
+
+                <p class="catalog-summary" id="catalog-summary">Загрузка…</p>
+
+                <div class="table-scroll" style="max-height:560px">
+                  <table class="stock-table">
+                    <thead>
+                      <tr>
+                        <th>Марка</th>
+                        <th class="num">Сечение</th>
+                        <th class="num">Жил</th>
+                        <th>Напряжение</th>
+                        <th class="num">Остаток</th>
+                        <th>Статус</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="stock-body">
+                      <tr><td colspan="7" class="stock-empty">Загрузка каталога…</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <p class="contest-note" style="padding:0 24px 24px">
+                  Указанные остатки носят информационный характер и не являются публичной офертой.
+                  Точное количество и цену подтверждает менеджер.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Заявка на расчёт ===================== -->
+    <section class="section section-white" aria-labelledby="order-title">
+      <div class="wrapper">
+        <div class="grid grid-2" style="align-items:start">
+          <div>
+            <span class="eyebrow">Заявка</span>
+            <h2 id="order-title" style="font-size:36px;margin-bottom:16px">Отправить запрос на расчёт</h2>
+            <p class="lead" style="font-size:16px">
+              Опишите задачу, укажите контакты и приложите файл со спецификацией.
+              Ответим в рабочее время и уточним, что понадобится для расчёта.
+            </p>
+            <div class="info-note" style="margin-top:24px">
+              <strong>Куда уходит заявка</strong>
+              Сейчас письмо формируется и открывается в вашем почтовом приложении.
+              После подключения сервера заявки будут уходить напрямую менеджеру.
+            </div>
+          </div>
+
+          <form data-form="quote" style="background:var(--white);padding:28px;border-radius:var(--radius)">
+            <div class="grid grid-2">
+              <div class="field">
+                <label for="q-name">Ваше имя <span class="req">*</span></label>
+                <input class="input" id="q-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
+              </div>
+              <div class="field">
+                <label for="q-company">Компания</label>
+                <input class="input" id="q-company" name="company" autocomplete="organization" placeholder="Название компании">
+              </div>
+              <div class="field">
+                <label for="q-email">E-mail <span class="req">*</span></label>
+                <input class="input" id="q-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru">
+              </div>
+              <div class="field">
+                <label for="q-phone">Телефон</label>
+                <input class="input" id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+              </div>
+            </div>
+            <div class="field">
+              <label for="q-message">Что требуется <span class="req">*</span></label>
+              <textarea class="textarea" id="q-message" name="message" required placeholder="Марка, сечение, количество жил, напряжение, объём"></textarea>
+            </div>
+            <div class="field">
+              <label for="q-file">Прикрепить файл</label>
+              <input class="input" id="q-file" name="attachment" type="file" multiple
+                     accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png,.dwg,.zip">
+              <div class="file-list" style="font-size:12px;color:var(--blue);margin-top:8px"></div>
+            </div>
+            <div class="field" style="font-size:13px;color:var(--muted)">
+              Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.
+            </div>
+            <button class="button big-button" type="submit">Отправить запрос</button>
+            <div class="form-notice" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <div class="overlay" id="write-us" role="dialog" aria-modal="true" aria-labelledby="write-us-title" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="write-us-title">Написать нам</h2>
+          <p class="modal-description">Ответим в ближайшее рабочее время.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <form data-form="write_us">
+        <div class="field">
+          <label for="wu-inn">ИНН организации <span class="req">*</span></label>
+          <input class="input" id="wu-inn" name="inn" inputmode="numeric" required placeholder="10 или 12 цифр">
+        </div>
+        <div class="field">
+          <label for="wu-email">E-mail <span class="req">*</span></label>
+          <input class="input" id="wu-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru">
+        </div>
+        <div class="field">
+          <label for="wu-message">Сообщение <span class="req">*</span></label>
+          <textarea class="textarea" id="wu-message" name="message" required placeholder="Опишите задачу или укажите позиции"></textarea>
+        </div>
+        <div class="field" style="font-size:13px;color:var(--muted)">
+          Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.
+        </div>
+        <button class="button big-button" type="submit">Отправить</button>
+        <div class="form-notice" role="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/catalog-demo.js"></script>
+  <script src="assets/js/quote.js"></script>
+</body>
+</html>

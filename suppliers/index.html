@@ -1,107 +1,115 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="/favicon.ico">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Поставщикам — Балс</title>
-<meta name="description" content="Компания Балс ежедневно закупает кабельную и электротехническую продукцию, упаковку, сувенирную продукцию и транспортные услуги. Заполните анкету поставщика.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #eef1f4;
-    --ink: #13202c;
-    --muted: #54626f;
-    --card: #ffffff;
-    --line: #cfd7de;
-    --yellow: #f2c200;
-    --blue: #1f5fbf;
-    --green: #2f8f5b;
-    --red: #c8452d;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
-    line-height: 1.55;
-  }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 56px; }
-  .back { display: inline-block; color: var(--muted); text-decoration: none; font-size: 15px; margin-bottom: 28px; }
-  .back:hover { color: var(--ink); text-decoration: underline; }
-  h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.1; font-weight: 800; margin: 0 0 20px; letter-spacing: -0.02em; }
-  .bar { height: 8px; width: 120px; background: linear-gradient(90deg, var(--blue) 0 25%, var(--yellow) 25% 50%, var(--green) 50% 75%, var(--red) 75%); border-radius: 4px; margin-bottom: 24px; }
-  .lead { font-size: 18px; max-width: 62ch; margin: 0 0 16px; }
-  .list { margin: 0 0 16px; padding-left: 20px; max-width: 62ch; }
-  .list li { margin-bottom: 8px; }
-  .note { color: var(--muted); max-width: 62ch; margin: 0 0 36px; }
-  h2 { font-size: 22px; margin: 0 0 16px; }
-  .buttons { display: grid; gap: 12px; }
-  .btn {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    padding: 20px 22px;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 8px solid var(--c);
-    border-radius: 6px;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 18px; font-weight: 700;
-    transition: background .15s, border-color .15s;
-  }
-  .btn small { display: block; font-weight: 400; font-size: 14px; color: var(--muted); margin-top: 2px; }
-  .btn svg { flex: none; width: 22px; height: 22px; }
-  .btn:hover { background: #fffbe6; border-color: var(--ink); border-left-color: var(--c); }
-  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
-  .b1 { --c: var(--blue); } .b2 { --c: var(--yellow); } .b3 { --c: var(--green); } .b4 { --c: var(--red); }
-  footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
-  @media (max-width: 480px) { .btn { padding: 18px 16px; font-size: 17px; } }
-</style>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поставщикам — Балс</title>
+  <meta name="description" content="Анкеты для поставщиков Балс: кабельная и электротехническая продукция, транспортные компании, тара и упаковка, прочие услуги и товары.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
-<main class="wrap">
-  <a class="back" href="/">← На главную Балс</a>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <div id="site-header"></div>
 
-  <h1>Поставщикам</h1>
-  <div class="bar" aria-hidden="true"></div>
+  <main class="main-content" id="main">
+    <section class="page-head">
+      <div class="wrapper">
+        <nav class="breadcrumbs" aria-label="Навигация"><a href="./">Главная</a><span class="sep">/</span><span>Поставщикам</span></nav>
+        <h1>Поставщикам</h1>
+        <p class="lead">Мы ежедневно закупаем кабель, электротехнику, тару и упаковку, транспортные и прочие услуги. Выберите своё направление и заполните анкету.</p>
+      </div>
+    </section>
 
-  <p class="lead">Компания Балс ежедневно закупает:</p>
-  <ul class="list">
-    <li><strong>кабельную и электротехническую продукцию;</strong></li>
-    <li><strong>упаковку для кабельной продукции:</strong> кабельные барабаны, паллеты, стрейч-плёнку, упаковочную ленту, скотч, гофрокартон и гофроящики, торцевые заглушки и колпачки для кабеля;</li>
-    <li><strong>сувенирную продукцию;</strong></li>
-    <li><strong>транспортные услуги.</strong></li>
-  </ul>
-  <p class="note">Выберите своё направление и заполните короткую анкету. Мы свяжемся с вами, если ваше предложение подойдёт.</p>
+    <section class="section">
+      <div class="wrapper">
+        <div class="grid grid-3">
 
-  <h2>Выберите направление</h2>
-  <nav class="buttons" aria-label="Анкеты поставщиков">
-    <!-- ЗАМЕНИТЕ ссылки ниже на ссылки ваших Яндекс Форм -->
-    <a class="btn b1" href="https://forms.yandex.ru/cloud/ССЫЛКА_1/" target="_blank" rel="noopener">
-      <span>Для поставщиков КП и ЭТ<small>Кабельная продукция и электротехника</small></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a class="btn b2" href="https://forms.yandex.ru/cloud/ССЫЛКА_2/" target="_blank" rel="noopener">
-      <span>Транспортным компаниям<small>Перевозки и доставка грузов</small></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a class="btn b3" href="https://forms.yandex.ru/cloud/ССЫЛКА_3/" target="_blank" rel="noopener">
-      <span>Приём б/у тары<small>Кабельные барабаны, паллеты</small></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a class="btn b4" href="https://forms.yandex.ru/cloud/ССЫЛКА_4/" target="_blank" rel="noopener">
-      <span>Прочая продукция / услуги<small>Упаковка, сувенирная продукция и другое</small></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-  </nav>
+          <article class="card">
+            <div class="card-title">Поставщикам кабельно-проводниковой и электротехнической продукции</div>
+            <p class="card-text">Силовой кабель, провода, электротехнические изделия, разъёмы и модули.</p>
+            <div style="margin-top:18px">
+              <a class="button" href="#" data-placeholder="1" data-link-key="supplierCable">Заполнить анкету</a>
+            </div>
+          </article>
 
-  <footer>© Балс</footer>
-</main>
+          <article class="card">
+            <div class="card-title">Транспортным компаниям</div>
+            <p class="card-text">Перевозки и доставка кабельной продукции, в том числе на барабанах.</p>
+            <div style="margin-top:18px">
+              <a class="button" href="#" data-placeholder="1" data-link-key="supplierTransport">Заполнить анкету</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-title">Тара и упаковка</div>
+            <p class="card-text">Барабаны, паллеты, стрейч-плёнка, маты, лента, скотч, гофрокартон и прочее. Сюда же — приём б/у тары.</p>
+            <div style="margin-top:18px">
+              <a class="button" href="#" data-placeholder="1" data-link-key="supplierPackaging">Заполнить анкету</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-title">Прочие услуги</div>
+            <p class="card-text">Подряд, монтаж, логистика, сервисные услуги.</p>
+            <div style="margin-top:18px">
+              <a class="button" href="#" data-placeholder="1" data-link-key="supplierServices">Заполнить анкету</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-title">Прочие товары</div>
+            <p class="card-text">Прочие товарные категории, которые могут понадобиться в работе.</p>
+            <div style="margin-top:18px">
+              <a class="button" href="#" data-placeholder="1" data-link-key="supplierGoods">Заполнить анкету</a>
+            </div>
+          </article>
+
+          <article class="card" style="background:var(--blue);color:var(--white)">
+            <div class="card-title" style="color:var(--white)">Не нашли направление?</div>
+            <p class="card-text" style="color:#ffffffcc">Напишите нам — рассмотрим предложение индивидуально.</p>
+            <div style="margin-top:18px">
+              <button class="button" style="background:var(--white);color:var(--dark-blue)" type="button" data-open-modal="write-us">Написать нам</button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="info-note warn" style="margin-top:26px">
+          <strong>Анкеты ещё не подключены</strong>
+          Ссылки на Яндекс.Формы вносятся в один файл — <code>assets/js/config.js</code>.
+          Пока адрес пуст, кнопка показывает уведомление и никуда не ведёт.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="overlay" id="write-us" role="dialog" aria-modal="true" aria-labelledby="write-us-title" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div><h2 class="modal-title" id="write-us-title">Написать нам</h2><p class="modal-description">Ответим в ближайшее рабочее время.</p></div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <form data-form="write_us">
+        <div class="field"><label for="wu-inn">ИНН организации <span class="req">*</span></label><input class="input" id="wu-inn" name="inn" inputmode="numeric" required placeholder="10 или 12 цифр"></div>
+        <div class="field"><label for="wu-email">E-mail <span class="req">*</span></label><input class="input" id="wu-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru"></div>
+        <div class="field"><label for="wu-message">Сообщение <span class="req">*</span></label><textarea class="textarea" id="wu-message" name="message" required placeholder="Опишите задачу или укажите позиции"></textarea></div>
+        <div class="field" style="font-size:13px;color:var(--muted)">Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.</div>
+        <button class="button big-button" type="submit">Отправить</button>
+        <div class="form-notice" role="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+
 </body>
 </html>

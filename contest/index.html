@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Конкурс трейдеров — Балс</title>
+  <meta name="description" content="Конкурс для трейдеров Балс: условия участия, регистрация и турнирная таблица участников с результатами.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <div id="site-header"></div>
+
+  <main class="main-content" id="main">
+
+    <section class="page-head">
+      <div class="wrapper">
+        <nav class="breadcrumbs" aria-label="Навигация">
+          <a href="./">Главная</a><span class="sep">/</span><span>Конкурс</span>
+        </nav>
+        <div class="contest-hero">
+          <div>
+            <span class="eyebrow">Конкурс для трейдеров</span>
+            <h1>Конкурс продаж</h1>
+            <p class="lead">
+              Участвуют трейдеры, которые продают нашу продукцию. Ниже — условия, регистрация
+              и турнирная таблица с результатами участников.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+              <!-- Ссылка на Яндекс.Форму задаётся в assets/js/config.js -> RKB_LINKS.contestRegister -->
+              <a class="button big-button" href="#" id="contest-register" data-placeholder="1" data-link-key="contestRegister">
+                Зарегистрироваться в конкурсе
+              </a>
+              <a class="button big-button gray-button" href="#table">Смотреть таблицу</a>
+            </div>
+          </div>
+
+          <div class="contest-target">
+            <div class="contest-target-label">Суммарный объём продаж участников</div>
+            <div class="contest-target-value" id="contest-target-value">—</div>
+            <div class="contest-progress"><i id="contest-progress-fill"></i></div>
+            <div class="contest-status" id="contest-status">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="contest-status-text">Загружаем данные конкурса…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Информация об участии ===================== -->
+    <section class="section" aria-labelledby="rules-title">
+      <div class="wrapper">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Условия</span>
+            <h2 class="section-title" id="rules-title">Информация об участии</h2>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="card-title">Кто участвует</div>
+            <p class="card-text">Трейдеры и торговые компании, работающие с продукцией Балс. Регистрация — через форму, участие бесплатное.</p>
+          </article>
+          <article class="card">
+            <div class="card-title">Как начисляются результаты</div>
+            <p class="card-text">В зачёт идут продажи, отгруженные в период конкурса. Результаты вносятся в таблицу организатором.</p>
+          </article>
+          <article class="card">
+            <div class="card-title">Как узнать итоги</div>
+            <p class="card-text">Турнирная таблица обновляется по мере внесения данных. Победители определяются по итогам периода.</p>
+          </article>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:20px">
+          <div class="accordion" data-collapse>
+            <button class="accordion-head" type="button" aria-expanded="false">
+              <span>Правила конкурса</span>
+              <svg class="icon icon-stroke" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg>
+            </button>
+            <div class="accordion-body">
+              <div class="prose" style="font-size:15px;line-height:1.6">
+                <p>Правила публикуются организатором. Ниже — основа, которую нужно подтвердить:</p>
+                <ul>
+                  <li>участник регистрируется по форме и подтверждает согласие с правилами;</li>
+                  <li>в зачёт идут продажи, отгруженные в период конкурса;</li>
+                  <li>данные для таблицы предоставляет организатор;</li>
+                  <li>спорные позиции рассматривает организатор.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion" data-collapse>
+            <button class="accordion-head" type="button" aria-expanded="false">
+              <span>Сроки и призы</span>
+              <svg class="icon icon-stroke" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg>
+            </button>
+            <div class="accordion-body">
+              <div class="prose" style="font-size:15px;line-height:1.6">
+                <p>Сроки проведения конкурса и состав призового фонда указывает организатор.</p>
+                <div class="info-note warn">
+                  <strong>Требует подтверждения</strong>
+                  Период конкурса, призы и критерии определения победителей не заполнены намеренно —
+                  эти данные должна предоставить компания, чтобы не публиковать непроверенные условия.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Турнирная таблица ===================== -->
+    <section class="section section-white" id="table" aria-labelledby="table-title">
+      <div class="wrapper">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Таблица</span>
+            <h2 class="section-title" id="table-title">Конкурсная таблица</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span class="badge badge-order" id="contest-count">0 участников</span>
+            <button class="button gray-button" type="button" id="contest-refresh"
+                    style="height:42px;padding:0 20px;font-size:14px">Обновить данные</button>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom:20px">
+          <article class="winner-card">
+            <div class="winner-medal" aria-hidden="true">🏆</div>
+            <div class="winner-label">Лидер конкурса</div>
+            <h3 id="winner-top">Пока нет результатов</h3>
+            <p id="winner-top-detail">Определится после внесения данных</p>
+          </article>
+          <article class="winner-card">
+            <div class="winner-medal" aria-hidden="true">📋</div>
+            <div class="winner-label">Как читать таблицу</div>
+            <h3 style="font-size:17px">Место, участник, результат</h3>
+            <p>Доля считается от суммарного объёма продаж всех участников и показывает вклад в общий результат.</p>
+          </article>
+        </div>
+
+        <div class="table-scroll">
+          <table class="data-table contest-table">
+            <thead>
+              <tr>
+                <th class="num">№</th>
+                <th>Участник</th>
+                <th>Регион</th>
+                <th class="num">Результат</th>
+                <th>Доля от общей суммы</th>
+              </tr>
+            </thead>
+            <tbody id="contest-body">
+              <tr><td colspan="5" class="stock-empty">Подключаем таблицу конкурса…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-notice err" id="contest-error" role="alert"></div>
+
+        <p class="contest-note">
+          Таблица формируется из Google Таблицы, которую ведёт организатор конкурса.
+          Столбцы: «Участник», «Регион», «Продажи» (или «Баллы»). Проценты рассчитываются на этой странице.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== Регистрация (повтор внизу) ===================== -->
+    <section class="section">
+      <div class="wrapper">
+        <div class="cta-band">
+          <div>
+            <h2>Готовы участвовать?</h2>
+            <p>Заполните форму регистрации — организатор свяжется и добавит вас в таблицу конкурса.</p>
+          </div>
+          <div class="cta-band-actions">
+            <a class="button big-button button-primary" href="#" data-placeholder="1" data-link-key="contestRegister">
+              Зарегистрироваться в конкурсе
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <div class="overlay" id="write-us" role="dialog" aria-modal="true" aria-labelledby="write-us-title" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="write-us-title">Написать нам</h2>
+          <p class="modal-description">Ответим в ближайшее рабочее время.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <form data-form="write_us">
+        <div class="field">
+          <label for="wu-inn">ИНН организации <span class="req">*</span></label>
+          <input class="input" id="wu-inn" name="inn" inputmode="numeric" required placeholder="10 или 12 цифр">
+        </div>
+        <div class="field">
+          <label for="wu-email">E-mail <span class="req">*</span></label>
+          <input class="input" id="wu-email" name="email" type="email" required autocomplete="email" placeholder="name@company.ru">
+        </div>
+        <div class="field">
+          <label for="wu-message">Сообщение <span class="req">*</span></label>
+          <textarea class="textarea" id="wu-message" name="message" required placeholder="Опишите задачу или укажите позиции"></textarea>
+        </div>
+        <div class="field" style="font-size:13px;color:var(--muted)">
+          Нажимая «Отправить», вы соглашаетесь с <a href="privacy/">политикой обработки персональных данных</a>.
+        </div>
+        <button class="button big-button" type="submit">Отправить</button>
+        <div class="form-notice" role="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/contest.js"></script>
+</body>
+</html>

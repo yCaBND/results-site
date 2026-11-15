@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Служебные и непрофильные каталоги индексировать не нужно
+Disallow: /_audit/
+Disallow: /_backup-pre-deploy-*/
+Disallow: /_template/
+
+Sitemap: https://xn--80ab5aya.xn--p1acf/sitemap.xml
